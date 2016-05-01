@@ -1,0 +1,6 @@
+{
+  "my_repository_name": {
+    "branch": "master",
+    "script": "/tmp/myscript/deploy.sh"
+  }
+}
