@@ -71,7 +71,9 @@ server.route({
         }],
         executeScript: ['checkScriptExecutable', (endExecuteScript, results) => {
           var project = results.getConfig;
-          const child = exec('sh ' + project.script,
+          const child = exec('sh ' + project.script, {
+              cwd: path.parse(project.script).dir
+            },
             (error, stdout, stderr) => {
               if (error !== null) {
                 return endExecuteScript(Boom.badRequest("script execution failed"));
@@ -85,7 +87,7 @@ server.route({
           console.log(err);
           return reply(err);
         }
-        console.log('executing script at '+results.getConfig.script);
+        console.log('executing script at ' + results.getConfig.script);
         return reply();
       });
   }
